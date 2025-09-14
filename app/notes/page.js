@@ -11,7 +11,7 @@ import AddNoteModal from "./components/AddNoteModal";
 export default function NotesPage() {
   const { user } = useAuth();
   const router = useRouter();
-
+const api = "https://notes-server-production-4b8a.up.railway.app";
   const [onClick, setOnClick] = useState(false);
   const [addform, setAddForm] = useState(false);
   const [content, setContent] = useState("");
@@ -33,12 +33,9 @@ export default function NotesPage() {
     const fetchNotes = async () => {
       try {
         setLoading(true);
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes`,
-          {
-            headers: { Authorization: `Bearer ${storedToken}` },
-          }
-        );
+        const res = await fetch(`${api}/notes`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
         const data = await res.json();
 
         const decoded = jwtDecode(storedToken);
@@ -64,7 +61,7 @@ export default function NotesPage() {
 
     const note = { userid: userId, title, description: content, color };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/notes`, {
+    const res = await fetch(`${api}/notes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

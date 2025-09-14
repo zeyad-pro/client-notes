@@ -14,7 +14,7 @@ const Deletenote = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("#ffffff");
-
+const api = "https://notes-server-production-4b8a.up.railway.app";
   const { user } = useAuth();
 
   // 🟢 التوكن
@@ -26,16 +26,13 @@ const Deletenote = () => {
 
     const getNote = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${savedToken}`,
-            },
-          }
-        );
+        const res = await fetch(`${api}/notes/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${savedToken}`,
+          },
+        });
         const data = await res.json();
         setLoading(false);
         if (data.success) {
@@ -61,17 +58,14 @@ const Deletenote = () => {
     const note = { title, description, color };
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // هنا التعديل
-          },
-          body: JSON.stringify(note),
-        }
-      );
+      const res = await fetch(`${api}/notes/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // هنا التعديل
+        },
+        body: JSON.stringify(note),
+      });
 
       const data = await res.json();
       if (data.success) {

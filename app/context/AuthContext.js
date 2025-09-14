@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
-
+const api = "https://notes-server-production-4b8a.up.railway.app";
 export function AuthProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -19,14 +19,11 @@ export function AuthProvider({ children }) {
 
   const registerUser = async (data) => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/register`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
+      const res = await fetch(`${api}/users/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
       const result = await res.json();
 
       if (result.success) {
@@ -44,19 +41,13 @@ export function AuthProvider({ children }) {
   };
 
   const loginUser = async (data) => {
-    console.log(
-      "🚀 ~ file: AuthContext.js:39 ~ loginUser ~ process.env.NEXT_PUBLIC_API_BASE_URL",
-      process.env.NEXT_PUBLIC_API_BASE_URL
-    );
+    console.log("🚀 ~ file: AuthContext.js:39 ~ loginUser ~ api", api);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
+      const res = await fetch(`${api}/users/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
       const result = await res.json();
 
       if (result.success) {

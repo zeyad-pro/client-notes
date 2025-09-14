@@ -6,6 +6,7 @@ import { useAuth } from "@/app/context/AuthContext";
 import { HexColorPicker } from "react-colorful";
 
 const UpdateNote = () => {
+  const api = "https://notes-server-production-4b8a.up.railway.app";
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const params = useParams();
@@ -26,16 +27,13 @@ const UpdateNote = () => {
 
     const getNote = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${savedToken}`,
-            },
-          }
-        );
+        const res = await fetch(`${api}/notes/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${savedToken}`,
+          },
+        });
         const data = await res.json();
         setLoading(false);
         if (data.success) {
@@ -61,17 +59,14 @@ const UpdateNote = () => {
     const note = { title, description, color };
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // هنا التعديل
-          },
-          body: JSON.stringify(note),
-        }
-      );
+      const res = await fetch(`${api}/notes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // هنا التعديل
+        },
+        body: JSON.stringify(note),
+      });
 
       const data = await res.json();
       if (data.success) {
