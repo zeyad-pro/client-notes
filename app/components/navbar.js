@@ -206,7 +206,7 @@ function Navbar() {
               </a>
               <a
                 className="bg-blue-600 rounded-full px-4 py-2.5 font-bold text-sm text-white hover:bg-blue-700"
-                href="/profile"
+                href="/"
               >
                 Z
               </a>

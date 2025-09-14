@@ -26,13 +26,16 @@ const Deletenote = () => {
 
     const getNote = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/notes/${id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${savedToken}`,
-          },
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${savedToken}`,
+            },
+          }
+        );
         const data = await res.json();
         setLoading(false);
         if (data.success) {
@@ -58,14 +61,17 @@ const Deletenote = () => {
     const note = { title, description, color };
 
     try {
-      const res = await fetch(`http://localhost:3001/notes/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // هنا التعديل
-        },
-        body: JSON.stringify(note),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // هنا التعديل
+          },
+          body: JSON.stringify(note),
+        }
+      );
 
       const data = await res.json();
       if (data.success) {
@@ -89,11 +95,21 @@ const Deletenote = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 text-4xl flex-col">
-    do you sure you want to delete this note?
-    <div className="flex gap-4 mt-4">
-      <button onClick={(e) => handleSubmit(e)} className="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">YES</button>
-      <button onClick={() => router.push("/notes")} className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">NO</button>
-    </div>
+      do you sure you want to delete this note?
+      <div className="flex gap-4 mt-4">
+        <button
+          onClick={(e) => handleSubmit(e)}
+          className="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+        >
+          YES
+        </button>
+        <button
+          onClick={() => router.push("/notes")}
+          className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+        >
+          NO
+        </button>
+      </div>
     </div>
   );
 };

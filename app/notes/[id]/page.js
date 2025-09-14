@@ -26,13 +26,16 @@ const UpdateNote = () => {
 
     const getNote = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/notes/${id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${savedToken}`,
-          },
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${savedToken}`,
+            },
+          }
+        );
         const data = await res.json();
         setLoading(false);
         if (data.success) {
@@ -58,14 +61,17 @@ const UpdateNote = () => {
     const note = { title, description, color };
 
     try {
-      const res = await fetch(`http://localhost:3001/notes/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // هنا التعديل
-        },
-        body: JSON.stringify(note),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // هنا التعديل
+          },
+          body: JSON.stringify(note),
+        }
+      );
 
       const data = await res.json();
       if (data.success) {
@@ -115,7 +121,7 @@ const UpdateNote = () => {
             <label className="block text-gray-700 font-medium mb-2">
               Choose Color
             </label>
-            <HexColorPicker 
+            <HexColorPicker
               color={color}
               onChange={setColor}
               className="rounded-xl shadow-lg"

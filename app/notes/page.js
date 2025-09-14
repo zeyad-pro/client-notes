@@ -33,9 +33,12 @@ export default function NotesPage() {
     const fetchNotes = async () => {
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:3001/notes", {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/notes`,
+          {
+            headers: { Authorization: `Bearer ${storedToken}` },
+          }
+        );
         const data = await res.json();
 
         const decoded = jwtDecode(storedToken);
@@ -61,7 +64,7 @@ export default function NotesPage() {
 
     const note = { userid: userId, title, description: content, color };
 
-    const res = await fetch(`http://localhost:3001/notes`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/notes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

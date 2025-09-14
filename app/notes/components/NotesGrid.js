@@ -8,7 +8,7 @@ export default function NotesGrid({ notes, loading }) {
         Array.from({ length: 4 }).map((_, i) => <LoadingSkeleton key={i} />)
       ) : notes.length === 0 ? (
         <div className="col-span-4 text-center text-gray-600 text-lg font-semibold">
-          No notes found
+          No notes else
         </div>
       ) : (
         notes.map((note) => <NoteCard key={note._id} note={note} />)
