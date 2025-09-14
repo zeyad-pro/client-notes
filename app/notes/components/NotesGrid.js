@@ -3,7 +3,7 @@ import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function NotesGrid({ notes, loading }) {
   return (
-    <div className="grid grid-cols-4 gap-4 p-4">
+    <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 p-4">
       {loading ? (
         Array.from({ length: 4 }).map((_, i) => <LoadingSkeleton key={i} />)
       ) : notes.length === 0 ? (
