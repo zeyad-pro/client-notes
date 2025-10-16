@@ -11,7 +11,7 @@ import AddNoteModal from "./components/AddNoteModal";
 export default function NotesPage() {
   const { user } = useAuth();
   const router = useRouter();
-const api = "https://notes-server-production-4b8a.up.railway.app";
+const api = "https://notes-server-6r1w.onrender.com/";
   const [onClick, setOnClick] = useState(false);
   const [addform, setAddForm] = useState(false);
   const [content, setContent] = useState("");

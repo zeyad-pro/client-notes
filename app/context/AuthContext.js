@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
-const api = "https://notes-server-production-4b8a.up.railway.app";
+const api = "https://notes-server-6r1w.onrender.com/";
 export function AuthProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);

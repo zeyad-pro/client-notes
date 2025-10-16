@@ -14,7 +14,7 @@ const Deletenote = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("#ffffff");
-const api = "https://notes-server-production-4b8a.up.railway.app";
+const api = "https://notes-server-6r1w.onrender.com/";
   const { user } = useAuth();
 
   // 🟢 التوكن
