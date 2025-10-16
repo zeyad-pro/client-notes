@@ -6,7 +6,7 @@ import { useAuth } from "@/app/context/AuthContext";
 import { HexColorPicker } from "react-colorful";
 
 const UpdateNote = () => {
-  const api = "https://notes-server-6r1w.onrender.com/";
+  const api = "https://notes-server-6r1w.onrender.com";
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const params = useParams();
